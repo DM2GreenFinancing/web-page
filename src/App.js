@@ -94,24 +94,33 @@ const App = () => {
         {/* INSERT DESCRIPTION BELLOW */}
         <Breadcrumb.Item>Questions</Breadcrumb.Item>
       </Breadcrumb>
-      <Form form={form}>
+      <Form form={form} onFinish={done}>
       <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-      <Form.Item name='Q1' label="Is the project's investment horizon short-term? (Less than 5 years)?">
-      <Radio.Group onChange={onChange}>
+      <Form.Item name='Q1' label="Is the project's investment horizon short-term? (Less than 5 years)?" 
+       rules={[{ required: true, message:'Please select an option' }]}
+      >
+      <Radio.Group onChange={onChange} >
         <Radio value='Q1 D'>Yes</Radio>
         <Radio value='Q1 P B X'>No</Radio>
         </Radio.Group>
         </Form.Item>
     
-        <Form.Item name="Q2" label="Is the project's investment horizon medium term? (Between 5-10 years)" hidden={value['Q1']?.includes('X') ? false : true}>
+        <Form.Item name="Q2" label="Is the project's investment horizon medium term? (Between 5-10 years)" 
+        hidden={value['Q1']?.includes('X') ? false : true}
+        rules={[{ required: value['Q1']?.includes('X'), message:'Please select an option' }]}
+
+        >
         <Row>
-          <Radio.Group onChange={onChange} >
+          <Radio.Group onChange={onChange}>
             <Radio value='Q2 P D B'>Yes</Radio>
             <Radio value='Q2 X'>No</Radio>
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item name="Q3" label="Is the project's investment horizon long term? (Greater than 10 years)" hidden={value['Q2']?.includes('X') ? false : true}>
+        <Form.Item name="Q3" label="Is the project's investment horizon long term? (Greater than 10 years)" 
+        hidden={value['Q2']?.includes('X') ? false : true}
+        rules={[{ required: value['Q2']?.includes('X'), message:'Please select an option' }]}
+        >
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q3 P B'>Yes</Radio>
@@ -119,7 +128,9 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item name="Q4" label="Is the estimated project size greater than $1 million?">
+        <Form.Item name="Q4" label="Is the estimated project size greater than $1 million?"
+         rules={[{ required: true, message:'Please select an option' }]}
+        >
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q4 P B'>Yes</Radio>
@@ -127,7 +138,9 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item name="Q5" label="Does the project still need to raise funding?">
+        <Form.Item name="Q5" label="Does the project still need to raise funding?"
+         rules={[{ required: true, message:'Please select an option' }]}
+        >
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q5 B D'>Yes</Radio>
@@ -135,7 +148,9 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item name="Q6" label="Does the DM desire contractual oversight of the project development?">
+        <Form.Item name="Q6" label="Does the DM desire contractual oversight of the project development?"
+         rules={[{ required: true, message:'Please select an option' }]}
+        >
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q6 P'>Yes</Radio>
@@ -143,7 +158,9 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item name="Q7" label="Does the DM forsee interest rates rising over the course of the project?">
+        <Form.Item name="Q7" label="Does the DM forsee interest rates rising over the course of the project?"
+         rules={[{ required: true, message:'Please select an option' }]}
+        >
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q7 D'>Yes</Radio>
@@ -151,7 +168,9 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item name="Q8" label="Does the DM have (or plans to obtain) the capacity to complete impact tracking?">
+        <Form.Item name="Q8" label="Does the DM have (or plans to obtain) the capacity to complete impact tracking?"
+        rules={[{ required: true, message:'Please select an option' }]}
+        >
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q8 B'>Yes</Radio>
@@ -159,7 +178,9 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item name="Q9" label="Is a private partnership expected to be part of the project?">
+        <Form.Item name="Q9" label="Is a private partnership expected to be part of the project?"
+         rules={[{ required: true, message:'Please select an option' }]}
+        >
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q9 P'>Yes</Radio>
@@ -168,7 +189,9 @@ const App = () => {
           </Row>
         </Form.Item>
 
-        <Form.Item name="Q10" label="Will the project potentially align with the Green Bond Principles?">
+        <Form.Item name="Q10" label="Will the project potentially align with the Green Bond Principles?"
+         rules={[{ required: true, message:'Please select an option' }]}
+        >
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q10 B'>Yes</Radio>
@@ -176,7 +199,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-       <Button onClick={done} type='primary' htmlType="submit"> Done</Button>
+       <Button type='primary' htmlType="submit"> Done</Button>
       </div>
       </Form>
     </Content>
