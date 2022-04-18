@@ -80,7 +80,7 @@ const App = () => {
       </Breadcrumb>
       <Form>
       <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-      <Form.Item label="Is there a privateIs the project's investment horizon short-term? (Less than 5 years)?">
+      <Form.Item label="Is the project's investment horizon short-term? (Less than 5 years)?">
       <Radio.Group onChange={onChange}>
         <Radio value='Q1 D'>Yes</Radio>
         <Radio value='Q1 P B X'>No</Radio>
