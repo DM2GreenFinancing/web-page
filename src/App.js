@@ -8,6 +8,7 @@ const App = () => {
   const [value, setValue] = React.useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalText, setModalText] = React.useState([]);
+  const [form] = Form.useForm();
   
   const showModal = () => {
     setIsModalVisible(true);
@@ -15,10 +16,14 @@ const App = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    setValue({});
+    form.resetFields();
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setValue({});
+    form.resetFields();
   };
 
   const onChange = e => {
@@ -27,7 +32,6 @@ const App = () => {
     let a = {[key]: obj};
     setValue({...value, ...a});
   };
-
 
   const done = () =>{
     let obj = {};
@@ -60,8 +64,6 @@ const App = () => {
        txtArray
     )
     showModal();
-
- 
   }
 
   return (
@@ -78,16 +80,16 @@ const App = () => {
         {/* INSERT DESCRIPTION BELLOW */}
         <Breadcrumb.Item>Questions</Breadcrumb.Item>
       </Breadcrumb>
-      <Form>
+      <Form form={form}>
       <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-      <Form.Item label="Is the project's investment horizon short-term? (Less than 5 years)?">
+      <Form.Item name='Q1' label="Is the project's investment horizon short-term? (Less than 5 years)?">
       <Radio.Group onChange={onChange}>
         <Radio value='Q1 D'>Yes</Radio>
         <Radio value='Q1 P B X'>No</Radio>
         </Radio.Group>
         </Form.Item>
     
-        <Form.Item label="Is the project's investment horizon medium term? (Between 5-10 years)" hidden={value['Q1']?.includes('X') ? false : true}>
+        <Form.Item name="Q2" label="Is the project's investment horizon medium term? (Between 5-10 years)" hidden={value['Q1']?.includes('X') ? false : true}>
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q2 P D B'>Yes</Radio>
@@ -95,7 +97,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Is the project's investment horizon long term? (Greater than 10 years)" hidden={value['Q2']?.includes('X') ? false : true}>
+        <Form.Item name="Q3" label="Is the project's investment horizon long term? (Greater than 10 years)" hidden={value['Q2']?.includes('X') ? false : true}>
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q3 P B'>Yes</Radio>
@@ -103,7 +105,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Is the estimated project size greater than $1 million?">
+        <Form.Item name="Q4" label="Is the estimated project size greater than $1 million?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q4 P B'>Yes</Radio>
@@ -111,7 +113,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Does the project still need to raise funding?">
+        <Form.Item name="Q5" label="Does the project still need to raise funding?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q5 B D'>Yes</Radio>
@@ -119,7 +121,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Does the DM desire contractual oversight of the project development?">
+        <Form.Item name="Q6" label="Does the DM desire contractual oversight of the project development?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q6 P'>Yes</Radio>
@@ -127,7 +129,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Does the DM forsee interest rates rising over the course of the project?">
+        <Form.Item name="Q7" label="Does the DM forsee interest rates rising over the course of the project?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q7 D'>Yes</Radio>
@@ -135,7 +137,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Does the DM have (or plans to obtain) the capacity to complete impact tracking?">
+        <Form.Item name="Q8" label="Does the DM have (or plans to obtain) the capacity to complete impact tracking?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q8 B'>Yes</Radio>
@@ -143,7 +145,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Is a private partnership expected to be part of the project?">
+        <Form.Item name="Q9" label="Is a private partnership expected to be part of the project?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q9 P'>Yes</Radio>
@@ -152,7 +154,7 @@ const App = () => {
           </Row>
         </Form.Item>
 
-        <Form.Item label="Will the project potentially align with the Green Bond Principles?">
+        <Form.Item name="Q10" label="Will the project potentially align with the Green Bond Principles?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q10 B'>Yes</Radio>
@@ -160,7 +162,7 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-       <Button onClick={done}> Done</Button>
+       <Button onClick={done} type='primary' htmlType="submit"> Done</Button>
       </div>
       </Form>
     </Content>
@@ -169,7 +171,7 @@ const App = () => {
 
     <Modal title="Result" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} 
       footer={[
-        <Button key="back" onClick={handleOk}>
+        <Button key="back" type='primary' onClick={handleOk}>
           Ok
         </Button>
       ]}
