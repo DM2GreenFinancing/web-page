@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { render } from 'react-dom';
-import { Menu, message, Layout, Breadcrumb, Row, Radio, Form , Button, Modal } from 'antd';
+import { Menu, Layout, Breadcrumb, Row, Radio, Form , Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
 const { Header, Content, Footer } = Layout;
 
@@ -27,10 +26,28 @@ const App = () => {
   };
 
   const onChange = e => {
+    let state ={};
     const obj = e.target.value.split(' ');
-    const key = obj.shift()
-    let a = {[key]: obj};
-    setValue({...value, ...a});
+    const key = obj.shift();
+
+    state = {[key]: obj};
+    if(key === 'Q1' && !obj.includes('X')){
+      form.resetFields(['Q2', 'Q3']);
+      state={
+        'Q1':['D'],
+        'Q2':[''],
+        'Q3': ['']
+      }
+      
+    } if(key === 'Q2' && !obj.includes('X')){
+      form.resetFields(['Q3']);
+      state={
+        'Q2':['P', 'D', 'B'],
+        'Q3': ['']
+      }
+      
+    }
+    setValue({...value, ...state});
   };
 
   const done = () =>{
@@ -54,15 +71,12 @@ const App = () => {
      for (let key in sortable){
         if(key === 'P')
           txtArray.push(`Public Private Partnership: ${obj.P || 0}`);
-        if(key === 'B')
+        else if(key === 'B')
           txtArray.push(`Green Bonds: ${obj.B || 0}`);
-        if(key ==='D')
+        else if(key ==='D')
           txtArray.push(`Sustainability Improvement Derivative: ${obj.D || 0}`);
      }
-
-    setModalText(
-       txtArray
-    )
+    setModalText(txtArray)
     showModal();
   }
 
