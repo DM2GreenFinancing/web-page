@@ -14,9 +14,6 @@ const App = () => {
     setValue({...value, ...a});
   };
 
-  const removeQuestion = e =>{
-    console.log(e);
-  }
 
   const done = () =>{
     let obj = {};
@@ -24,7 +21,8 @@ const App = () => {
       for(let v of value[k]){
         if(obj[v]){
           obj[v]++
-        }else{
+        }else if(v !== 'X'){
+          console.log(obj[v]);
           obj[v] =1;
         }
       }
@@ -47,30 +45,30 @@ const App = () => {
       </Breadcrumb>
       <Form>
       <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-      <Form.Item label="Is there a private development partner involved in the project?">
+      <Form.Item label="Is there a privateIs the project's investment horizon short-term? (Less than 5 years)?">
       <Radio.Group onChange={onChange}>
-        <Radio value='Q1 P'>Yes</Radio>
-        <Radio value='Q1 D B'>No</Radio>
+        <Radio value='Q1 D'>Yes</Radio>
+        <Radio value='Q1 P B X'>No</Radio>
         </Radio.Group>
         </Form.Item>
     
-        <Form.Item label="Is this a short-term project? (Less than 5 years)">
+        <Form.Item label="Is the project's investment horizon medium term? (Between 5-10 years)" hidden={value['Q1']?.includes('X') ? false : true}>
         <Row>
           <Radio.Group onChange={onChange} >
-            <Radio value='Q2 D'>Yes</Radio>
-            <Radio value='Q2 P B' onClick={removeQuestion}>No</Radio>
+            <Radio value='Q2 P D B'>Yes</Radio>
+            <Radio value='Q2 X'>No</Radio>
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Is this a medium term project? (Between 5-10 years)" hidden={value['Q2']?.includes('D') ? false : true}>
+        <Form.Item label="Is the project's investment horizon long term? (Greater than 10 years)" hidden={value['Q2']?.includes('X') ? false : true}>
         <Row>
           <Radio.Group onChange={onChange} >
-            <Radio value='Q3 P D B'>Yes</Radio>
-            <Radio value='Q3' >No</Radio>
+            <Radio value='Q3 P B'>Yes</Radio>
+            <Radio value='Q3 D' >No</Radio>
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Is this a long term project? (Greater than 10 years)">
+        <Form.Item label="Is the estimated project size greater than $1 million?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q4 P B'>Yes</Radio>
@@ -78,52 +76,52 @@ const App = () => {
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Is the project size greater than $1 million?">
+        <Form.Item label="Does the project still need to raise funding?">
         <Row>
           <Radio.Group onChange={onChange} >
-            <Radio value='Q5 P B'>Yes</Radio>
-            <Radio value='Q5 D'>No</Radio>
+            <Radio value='Q5 B D'>Yes</Radio>
+            <Radio value='Q5 P'>No</Radio>
           </Radio.Group>
           </Row>
         </Form.Item>
-        <Form.Item label="Is funding already secured for this project?">
+        <Form.Item label="Does the DM desire contractual oversight of the project development?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q6 P'>Yes</Radio>
-            <Radio value='Q6 D B'>No</Radio>
-          </Radio.Group>
-          </Row>
-        </Form.Item>
-        <Form.Item label="Is there a financial institution involved in the project?">
-        <Row>
-          <Radio.Group onChange={onChange} >
-            <Radio value='Q7 D B'>Yes</Radio>
-            <Radio value='Q7 P'>No</Radio>
-          </Radio.Group>
-          </Row>
-        </Form.Item>
-        <Form.Item label="Will the DM want oversight of the project development?">
-        <Row>
-          <Radio.Group onChange={onChange} >
-            <Radio value='Q8 P'>Yes</Radio>
-            <Radio value='Q8 D B'>No</Radio>
+            <Radio value='Q6 B D'>No</Radio>
           </Radio.Group>
           </Row>
         </Form.Item>
         <Form.Item label="Does the DM forsee interest rates rising over the course of the project?">
         <Row>
           <Radio.Group onChange={onChange} >
-            <Radio value='Q9 D'>Yes</Radio>
-            <Radio value='Q9 P B'>No</Radio>
+            <Radio value='Q7 D'>Yes</Radio>
+            <Radio value='Q7 B P'>No</Radio>
+          </Radio.Group>
+          </Row>
+        </Form.Item>
+        <Form.Item label="Does the DM have (or plans to obtain) the capacity to complete impact tracking?">
+        <Row>
+          <Radio.Group onChange={onChange} >
+            <Radio value='Q8 B'>Yes</Radio>
+            <Radio value='Q8 D P'>No</Radio>
+          </Radio.Group>
+          </Row>
+        </Form.Item>
+        <Form.Item label="Is a private partnership expected to be part of the project?">
+        <Row>
+          <Radio.Group onChange={onChange} >
+            <Radio value='Q9 P'>Yes</Radio>
+            <Radio value='Q9 B D'>No</Radio>
           </Radio.Group>
           </Row>
         </Form.Item>
 
-        <Form.Item label="Does the DM currently have the capacity to complete impact tracking that follows a strict international framework?">
+        <Form.Item label="Will the project potentially align with the Green Bond Principles?">
         <Row>
           <Radio.Group onChange={onChange} >
             <Radio value='Q10 B'>Yes</Radio>
-            <Radio value='Q10 P D'>No</Radio>
+            <Radio value='Q10 D P'>No</Radio>
           </Radio.Group>
           </Row>
         </Form.Item>
