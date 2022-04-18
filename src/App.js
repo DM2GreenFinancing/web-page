@@ -56,11 +56,6 @@ const App = () => {
           txtArray.push(`Sustainability Improvement Derivative: ${obj.D || 0}`);
      }
 
-     
-    
-    
-    
-    
     setModalText(
        txtArray
     )
@@ -80,6 +75,7 @@ const App = () => {
     </Header>
     <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
       <Breadcrumb style={{ margin: '16px 0' }}>
+        {/* INSERT DESCRIPTION BELLOW */}
         <Breadcrumb.Item>Questions</Breadcrumb.Item>
       </Breadcrumb>
       <Form>
