@@ -15,7 +15,7 @@ const App = () => {
   };
 
   const removeQuestion = e =>{
-    value
+    console.log(e);
   }
 
   const done = () =>{
