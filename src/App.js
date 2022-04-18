@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import { render } from 'react-dom';
-import { Menu, message, Layout, Breadcrumb, Row, Radio, Form , Button } from 'antd';
+import { Menu, message, Layout, Breadcrumb, Row, Radio, Form , Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
 const { Header, Content, Footer } = Layout;
 
 const App = () => {
   const [value, setValue] = React.useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalText, setModalText] = React.useState([]);
   
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const onChange = e => {
     const obj = e.target.value.split(' ');
     const key = obj.shift()
@@ -27,7 +41,20 @@ const App = () => {
         }
       }
     }
-    alert(JSON.stringify(obj))
+    // P = Public Private Partnership
+    // B = Green Bonds
+    // D = Sustainability Improvement Derivative
+    let txtArray = [];
+    txtArray.push(`Public Private Partnership: ${obj.P || 0}`);
+    txtArray.push(`Green Bonds: ${obj.B || 0}`);
+    txtArray.push(`Sustainability Improvement Derivative: ${obj.D || 0}`);
+    console.log(txtArray)
+    setModalText(
+       txtArray
+    )
+    showModal();
+
+ 
   }
 
   return (
@@ -131,7 +158,20 @@ const App = () => {
     </Content>
     
     <Footer style={{ textAlign: 'center' }}>DM Green Financing Tool ©2022</Footer>
+
+    <Modal title="Result" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} 
+      footer={[
+        <Button key="back" onClick={handleOk}>
+          Ok
+        </Button>
+      ]}
+    >
+    <li>
+      {modalText.map((txt, i) => <ul key={i}>{txt}</ul>)}
+       </li>
+      </Modal>
   </Layout>
+  
 )};
 
 export default App;
