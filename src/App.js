@@ -36,7 +36,6 @@ const App = () => {
         if(obj[v]){
           obj[v]++
         }else if(v !== 'X'){
-          console.log(obj[v]);
           obj[v] =1;
         }
       }
@@ -45,10 +44,23 @@ const App = () => {
     // B = Green Bonds
     // D = Sustainability Improvement Derivative
     let txtArray = [];
-    txtArray.push(`Public Private Partnership: ${obj.P || 0}`);
-    txtArray.push(`Green Bonds: ${obj.B || 0}`);
-    txtArray.push(`Sustainability Improvement Derivative: ${obj.D || 0}`);
-    console.log(txtArray)
+    const sortable = Object.entries(obj)
+    .sort(([,a],[,b]) => b-a)
+    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+     for (let key in sortable){
+        if(key === 'P')
+          txtArray.push(`Public Private Partnership: ${obj.P || 0}`);
+        if(key === 'B')
+          txtArray.push(`Green Bonds: ${obj.B || 0}`);
+        if(key ==='D')
+          txtArray.push(`Sustainability Improvement Derivative: ${obj.D || 0}`);
+     }
+
+     
+    
+    
+    
+    
     setModalText(
        txtArray
     )
