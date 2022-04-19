@@ -68,14 +68,18 @@ const App = () => {
     const sortable = Object.entries(obj)
     .sort(([,a],[,b]) => b-a)
     .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-     for (let key in sortable){
-        if(key === 'P')
-          txtArray.push(`Public Private Partnership: ${obj.P || 0}`);
-        else if(key === 'B')
-          txtArray.push(`Green Bonds: ${obj.B || 0}`);
-        else if(key ==='D')
-          txtArray.push(`Sustainability Improvement Derivative: ${obj.D || 0}`);
-     }
+    if(value['Q1'].includes('D')){
+      txtArray.push('Sustainability Improvement Derivative');
+    }else{
+      for (let key in sortable){
+          if(key === 'P')
+            txtArray.push(`Public Private Partnership: ${obj.P || 0}`);
+          else if(key === 'B')
+            txtArray.push(`Green Bonds: ${obj.B || 0}`);
+          else if(key ==='D')
+            txtArray.push(`Sustainability Improvement Derivative: ${obj.D || 0}`);
+      }
+    }
     setModalText(txtArray)
     showModal();
   }
