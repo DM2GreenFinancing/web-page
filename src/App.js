@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, Layout, Breadcrumb, Row, Radio, Form , Button, Modal } from 'antd';
 import 'antd/dist/antd.css';
+import './App.css';
 const { Header, Content, Footer } = Layout;
 
 const App = () => {
